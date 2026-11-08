@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex y Mar</title>
+  <title>Rocío y Jorge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
@@ -107,7 +107,25 @@
       letter-spacing: 0.08em;
     }
 
-    .count-block { text-align: center; padding: 4.5rem 1rem 3.5rem; }
+    .count-block { position: relative; text-align: center; padding: 4.5rem 1rem 3.5rem; }
+    img.cat {
+      width: 118px;
+      height: auto;
+      margin: 1.6rem auto 0;
+      object-fit: contain;
+      filter: none;
+      pointer-events: none;
+    }
+    @media (min-width: 1100px) {
+      img.cat {
+        position: absolute;
+        left: max(0.4rem, calc(50% - 540px));
+        top: 46%;
+        width: 176px;
+        margin: 0;
+        transform: translateY(-50%) rotate(-8deg);
+      }
+    }
     .count-title {
       font-family: "Cormorant Garamond", Palatino, serif;
       font-weight: 400;
@@ -268,84 +286,106 @@
     }
     .story p { margin-top: 1.2rem; font-size: 1.35rem; line-height: 1.45; max-width: 40rem; }
 
-    .band { padding: 4.5rem 1rem 2rem; text-align: center; }
-    .timeline {
-      position: relative;
-      width: min(880px, calc(100% - 2rem));
-      margin: 3.2rem auto 4rem;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      min-height: 11rem;
-    }
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 4%;
-      right: 4%;
-      top: 50%;
-      height: 1px;
-      background: #111;
-    }
-    .timeline li {
+    .band { padding: 4.5rem 1rem 3.2rem; text-align: center; background: #fff; }
+    .day {
+      width: min(640px, calc(100% - 2rem));
+      margin: 2.4rem auto 0.6rem;
       list-style: none;
-      position: relative;
-      text-align: center;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
+      color: #161616;
     }
-    .timeline li::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      width: 1px;
-      height: 22px;
-      background: #111;
+    .day li { padding: 1.55rem 0.6rem; }
+    .day time {
+      display: block;
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(2.15rem, 4.2vw, 2.75rem);
+      letter-spacing: 0.02em;
+      line-height: 1;
     }
-    .timeline li::after {
-      content: "";
-      position: absolute;
-      left: calc(50% - 4px);
-      width: 9px;
-      height: 9px;
-      border: 1px solid #111;
-      border-radius: 50%;
-      background: #fff;
+    .day strong {
+      display: block;
+      margin-top: 0.35rem;
+      font-weight: 500;
+      font-size: 0.92rem;
+      letter-spacing: 0.32em;
     }
-    .timeline .up { align-self: start; padding-bottom: 2.4rem; }
-    .timeline .up::before { bottom: 0; }
-    .timeline .up::after { bottom: 18px; }
-    .timeline .down { align-self: end; padding-top: 2.4rem; }
-    .timeline .down::before { top: 0; }
-    .timeline .down::after { top: 18px; }
-    .timeline strong { display: block; font-weight: 600; }
-    .timeline span { display: block; }
+    .day span {
+      display: block;
+      margin-top: 0.35rem;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.28rem;
+      line-height: 1.35;
+    }
 
-    .stay, .dress, .faq, .contact { padding: 1rem 0 3rem; }
-    .stay p, .dress p { font-size: 1.4rem; line-height: 1.4; margin-top: 1rem; }
-    .hotels { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.6rem; }
-    .hotels a {
-      border: 1px solid #111;
-      padding: 0.7rem 1.1rem;
-      letter-spacing: 0.16em;
-      font-size: 0.95rem;
+    .faq, .contact { padding: 1rem 0 3rem; }
+
+    .places { padding: 4.8rem 1rem 3.2rem; text-align: center; background: #fff; }
+    .places h2 {
+      font-family: "Cormorant Garamond", Palatino, serif;
+      font-weight: 400;
+      font-size: clamp(3.4rem, 8vw, 5.4rem);
+      letter-spacing: 0.03em;
+      line-height: 0.85;
     }
-    .swatches { display: flex; gap: 0.45rem; margin-top: 1.5rem; }
-    .swatches i { width: 42px; height: 54px; display: block; }
+    .places h2 em {
+      font-family: "Tangerine", cursive;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .places-lead {
+      margin-top: 1.15rem;
+      font-size: clamp(1.7rem, 3.2vw, 2.35rem);
+      line-height: 1.15;
+      text-wrap: balance;
+    }
+    .sites {
+      width: min(980px, 100%);
+      margin: 2.6rem auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.8rem;
+    }
+    .site figure {
+      position: relative;
+      margin: 0;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      background: #ececec;
+    }
+    .site img { position: absolute; inset: 0; }
+    .site.church img { object-position: center 18%; }
+    .site.party img { object-position: center 42%; }
+    .site .kind {
+      margin-top: 1.15rem;
+      font-size: 0.92rem;
+      letter-spacing: 0.32em;
+    }
+    .site .place-name {
+      font-family: "Tangerine", cursive;
+      font-weight: 700;
+      font-size: clamp(3.4rem, 6vw, 4.8rem);
+      line-height: 0.85;
+      margin-top: 0.1rem;
+    }
+    .site .addr { margin-top: 0.2rem; font-size: 1.28rem; line-height: 1.3; }
+    .photo-note {
+      width: min(980px, calc(100% - 2.4rem));
+      margin: 0.7rem auto 0;
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      color: #8a8a8a;
+    }
     .map {
-      margin-top: 1.2rem;
-      height: 280px;
-      filter: grayscale(0.2);
+      margin-top: 2.6rem;
+      height: 420px;
+      filter: grayscale(1);
       border: 0;
-      width: min(760px, calc(100% - 2.4rem));
+      width: min(980px, calc(100% - 2.4rem));
       display: block;
       margin-left: auto;
       margin-right: auto;
-    }
-    .portrait {
-      width: min(560px, calc(100% - 3rem));
-      margin: 1rem auto 0;
-      aspect-ratio: 3/4;
-      overflow: hidden;
     }
 
     .faq h2 { text-align: center; }
@@ -420,14 +460,14 @@
 
     @media (max-width: 760px) {
       nav { font-size: 1.05rem; flex-wrap: wrap; justify-content: center; }
-      .timeline { grid-template-columns: 1fr 1fr; min-height: 16rem; }
+      .sites { grid-template-columns: 1fr; gap: 2.6rem; }
       .contact .cols { grid-template-columns: 1fr; text-align: center; }
       .story-copy { padding-inline: 1.2rem; }
     }
   </style>
 </head>
 <body>
-  <header class="hero" id="fecha" style="--img:url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80')">
+  <header class="hero" id="fecha" style="--img:url('images/recortada2.jpeg')">
     <nav>
       <a href="#fecha">La fecha</a>
       <a href="#historia">Historia</a>
@@ -436,7 +476,7 @@
       <a href="#confirmar">Confirmar</a>
     </nav>
     <div class="hero-copy">
-      <h1 class="names">Alex <em>y</em> Mar</h1>
+      <h1 class="names">Rocío <em>y</em> Jorge</h1>
       <p class="married">nos casamos</p>
       <p class="when">12 DE SEPTIEMBRE 2027</p>
     </div>
@@ -448,6 +488,7 @@
     <div class="clock-labels">
       <span>DÍAS</span><span>HORAS</span><span>MINUTOS</span><span>SEGUNDOS</span>
     </div>
+    <img class="cat" src="images/gato.png" alt="">
   </section>
 
   <section class="banner" style="--img:url('https://images.unsplash.com/photo-1529634597503-139d3726fed5?auto=format&fit=crop&w=1800&q=80')">
@@ -491,50 +532,53 @@
 
   <section class="band" id="detalles">
     <h2>EL DÍA <em>horario</em></h2>
-    <ol class="timeline">
-      <li class="down"><strong>17:00</strong><span>CEREMONIA</span></li>
-      <li class="up"><strong>18:00</strong><span>CÓCTEL</span></li>
-      <li class="down"><strong>20:30</strong><span>CENA</span></li>
-      <li class="up"><strong>23:30</strong><span>BAILE</span></li>
+    <ol class="day">
+      <li>
+        <time>17:00</time>
+        <strong>CEREMONIA</strong>
+        <span>Corta. Lo hemos cronometrado por el bien de todos.</span>
+      </li>
+      <li>
+        <time>18:00</time>
+        <strong>CÓCTEL</strong>
+        <span>Fotos, jardín, y el primo al que no veías desde 2014.</span>
+      </li>
+      <li>
+        <time>20:30</time>
+        <strong>CENA</strong>
+        <span>Sentados, con mantel y sin prisa. Avisadnos de alergias.</span>
+      </li>
+      <li>
+        <time>23:30</time>
+        <strong>BAILE</strong>
+        <span>Hasta que alguien pida la canción que debimos vetar.</span>
+      </li>
     </ol>
   </section>
 
-  <section class="stay">
-    <div class="wrap">
-      <h2 class="count-title" style="font-size:clamp(2.8rem,6vw,4.2rem)">DÓNDE <em class="script">dormir</em></h2>
-      <p>Hay habitaciones apartadas cerca. El enlace, el precio y la fecha límite vivirán aquí, escritos en grande.</p>
-      <div class="hotels">
-        <a href="#detalles">HOTEL 1</a>
-        <a href="#detalles">HOTEL 2</a>
-        <a href="#detalles">HOTEL 3</a>
-      </div>
+  <section class="places" id="lugar">
+    <h2>EL <em>lugar</em></h2>
+    <p class="places-lead">Dos sitios, un mismo día.</p>
+    <div class="sites">
+      <article class="site church">
+        <figure>
+          <img src="images/santo-tome.jpg" alt="Torre mudéjar de la iglesia de Santo Tomé, en Toledo">
+        </figure>
+        <p class="kind">CEREMONIA</p>
+        <p class="place-name">Santo Tomé</p>
+        <p class="addr">Plaza del Conde<br>Toledo</p>
+      </article>
+      <article class="site party">
+        <figure>
+          <img src="images/las-mercedes.jpg" alt="Jardín y casa de piedra del cigarral de las Mercedes">
+        </figure>
+        <p class="kind">CELEBRACIÓN</p>
+        <p class="place-name">Las Mercedes</p>
+        <p class="addr">Cigarral, carretera<br>de Piedrabuena</p>
+      </article>
     </div>
-  </section>
-
-  <section class="dress">
-    <div class="wrap">
-      <h2 class="count-title" style="font-size:clamp(2.8rem,6vw,4.2rem)">CÓMO <em class="script">vestir</em></h2>
-      <p>De día y arreglados. El blanco lo llevamos nosotros. Los zapatos cómodos, vosotros: hay jardín y hay baile.</p>
-      <div class="swatches" aria-hidden="true">
-        <i style="background:#5c4636"></i>
-        <i style="background:#8a7b68"></i>
-        <i style="background:#b5aea4"></i>
-        <i style="background:#d5d2cd"></i>
-        <i style="background:#eeeae4"></i>
-      </div>
-    </div>
-  </section>
-
-  <section class="block">
-    <div class="wrap">
-      <h2>EL <em>lugar</em></h2>
-      <p class="venue" style="color:#161616">Santo Tomé<small>Plaza del Conde, Toledo</small></p>
-      <p class="venue" style="color:#161616">Las Mercedes<small>Cigarral, carretera de Piedrabuena</small></p>
-    </div>
-    <iframe class="map" title="Mapa de Toledo" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.045%2C39.852%2C-4.015%2C39.868&amp;layer=mapnik"></iframe>
-    <div class="portrait">
-      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80" alt="">
-    </div>
+    <iframe class="map" title="Recorrido de Santo Tomé al cigarral de las Mercedes" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?saddr=39.856822,-4.028344&amp;daddr=39.847163,-4.048762&amp;hl=es&amp;z=14&amp;output=embed"></iframe>
+    <p class="photo-note">Torre: Jose Luis Filpo Cabana, CC BY 3.0 · Finca: Turismo de Toledo</p>
   </section>
 
   <section class="faq" id="preguntas">
@@ -566,13 +610,13 @@
   <section class="contact">
     <div class="cols">
       <h2>ESCRÍBENOS</h2>
-      <p class="who">ALEX<small>teléfono</small></p>
-      <p class="who">MAR<small>teléfono</small></p>
+      <p class="who">Rocío<small>teléfono</small></p>
+      <p class="who">Jorge<small>teléfono</small></p>
     </div>
   </section>
 
   <footer>
-    <span>Alex y Mar · Toledo</span>
+    <span>Rocío y Jorge · Toledo</span>
     <span>12 · 09 · 2027</span>
   </footer>
 
