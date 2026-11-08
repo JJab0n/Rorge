@@ -70,6 +70,9 @@
       background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.5));
       z-index: 0;
     }
+    .hero::after {
+      background: linear-gradient(to bottom, rgba(18,18,18,0.5) 0%, rgba(0,0,0,0.16) 26%, rgba(0,0,0,0.12) 48%, rgba(0,0,0,0.5));
+    }
     .hero-copy, .banner-copy, .story-copy { position: relative; z-index: 1; }
 
     .names {
@@ -318,7 +321,7 @@
       line-height: 1.35;
     }
 
-    .faq, .contact { padding: 1rem 0 3rem; }
+    .contact { padding: 1rem 0 3rem; }
 
     .places { padding: 4.8rem 1rem 3.2rem; text-align: center; background: #fff; }
     .places h2 {
@@ -355,8 +358,8 @@
       background: #ececec;
     }
     .site img { position: absolute; inset: 0; }
-    .site.church img { object-position: center 18%; }
-    .site.party img { object-position: center 42%; }
+    .site.church img { object-position: center 58%; }
+    .site.party img { object-position: center 50%; }
     .site .kind {
       margin-top: 1.15rem;
       font-size: 0.92rem;
@@ -388,20 +391,39 @@
       margin-right: auto;
     }
 
-    .faq h2 { text-align: center; }
-    .faq h2 em { display: block; font-size: 1.15em; }
-    .q {
-      width: min(680px, calc(100% - 2.4rem));
-      margin: 2rem auto 0;
-      display: grid;
-      grid-template-columns: 3rem 1fr;
-      gap: 0.4rem 0.8rem;
-      padding-bottom: 1.2rem;
-      border-bottom: 1px solid #111;
+    .preboda { padding: 4.6rem 1rem 4.8rem; text-align: center; background: #fff; }
+    .preboda h2 {
+      font-family: "Cormorant Garamond", Palatino, serif;
+      font-weight: 400;
+      font-size: clamp(3.4rem, 8vw, 5.4rem);
+      letter-spacing: 0.03em;
+      line-height: 0.85;
     }
-    .q b { font-family: "Cormorant Garamond", Palatino, serif; font-weight: 400; font-size: 1.3rem; }
-    .q h3 { font-weight: 500; font-style: italic; font-size: 1.45rem; }
-    .q p { grid-column: 2; font-size: 1.2rem; line-height: 1.4; }
+    .preboda h2 em {
+      font-family: "Tangerine", cursive;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .preboda time {
+      display: block;
+      margin-top: 1.5rem;
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+    }
+    .preboda .where {
+      margin-top: 0.45rem;
+      font-size: 1.05rem;
+      letter-spacing: 0.22em;
+    }
+    .preboda .line {
+      width: min(34rem, calc(100% - 2rem));
+      margin: 1.15rem auto 0;
+      font-style: italic;
+      font-size: 1.45rem;
+      line-height: 1.4;
+    }
 
     .closing {
       min-height: 62vh;
@@ -467,18 +489,18 @@
   </style>
 </head>
 <body>
-  <header class="hero" id="fecha" style="--img:url('images/recortada2.jpeg')">
+  <header class="hero" id="fecha" style="--img:url('images/portada.jpg')">
     <nav>
       <a href="#fecha">La fecha</a>
       <a href="#historia">Historia</a>
       <a href="#detalles">Detalles</a>
-      <a href="#preguntas">Preguntas</a>
+      <a href="#preboda">Preboda</a>
       <a href="#confirmar">Confirmar</a>
     </nav>
     <div class="hero-copy">
       <h1 class="names">Rocío <em>y</em> Jorge</h1>
       <p class="married">nos casamos</p>
-      <p class="when">12 DE SEPTIEMBRE 2027</p>
+      <p class="when">29 DE MAYO 2027</p>
     </div>
   </header>
 
@@ -488,21 +510,21 @@
     <div class="clock-labels">
       <span>DÍAS</span><span>HORAS</span><span>MINUTOS</span><span>SEGUNDOS</span>
     </div>
-    <img class="cat" src="images/gato.png" alt="">
+    <img class="cat" src="images/luigi.png" alt="">
   </section>
 
-  <section class="banner" style="--img:url('https://images.unsplash.com/photo-1529634597503-139d3726fed5?auto=format&fit=crop&w=1800&q=80')">
+  <section class="banner" style="--img:url('images/anillo.jpeg')">
     <div class="banner-copy">
-      <p class="save"><em>guarda la</em>FECHA</p>
-      <p class="date-row"><span>SEPTIEMBRE</span><b>12</b><span>2027</span></p>
-      <p class="venue">Toledo<small>Santo Tomé y el cigarral de las Mercedes</small></p>
+      <p class="save"><em>save the</em>DATE</p>
+      <p class="date-row"><span>MAYO</span><b>29</b><span>2027</span></p>
+      <p class="venue">Plasencia<small>La Catedral y el Parador</small></p>
     </div>
   </section>
 
   <section class="invite" id="confirmar">
     <p class="please">por favor</p>
     <h2>CONFIRMA</h2>
-    <p>Nos haría ilusión contar contigo. <strong>Antes del 1 de agosto</strong>, dinos si vienes.</p>
+    <p>Nos haría ilusión contar contigo. <strong>Antes del 15 de abril</strong>, dinos si vienes.</p>
   </section>
 
   <form onsubmit="event.preventDefault(); this.querySelector('.fine').textContent = 'Recibido en esta prueba. Cuando la publiquemos, la respuesta llegará a vuestro correo.';">
@@ -522,11 +544,11 @@
     <p class="fine">El formulario, por ahora, solo se enseña.</p>
   </form>
 
-  <section class="story" id="historia" style="--img:url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1800&q=80')">
+  <section class="story" id="historia" style="--img:url('images/playa.jpeg')">
     <div class="story-copy">
-      <h2>NUESTRA <em>historia</em></h2>
+      <h2>NUESTRO <em>veintinueve</em></h2>
       <p>Nos conocimos junto a la mesa de los quesos. Había un cumpleaños, demasiada gente y un manchego que se terminó antes de que nos diéramos cuenta de que llevábamos una hora hablando. Desde entonces: dos mudanzas, un sofá heredado y el pacto de que los domingos se desayuna tarde.</p>
-      <p>El doce de septiembre lo contamos delante de todos. Venid hambrientos y con ganas de quedaros hasta el final.</p>
+      <p>El veintinueve de mayo lo contamos delante de todos. Venid hambrientos y con ganas de quedaros hasta el final.</p>
     </div>
   </section>
 
@@ -562,45 +584,33 @@
     <div class="sites">
       <article class="site church">
         <figure>
-          <img src="images/santo-tome.jpg" alt="Torre mudéjar de la iglesia de Santo Tomé, en Toledo">
+          <img src="images/catedral.jpg" alt="Fachada de la catedral de Plasencia">
         </figure>
         <p class="kind">CEREMONIA</p>
-        <p class="place-name">Santo Tomé</p>
-        <p class="addr">Plaza del Conde<br>Toledo</p>
+        <p class="place-name">Catedral</p>
+        <p class="addr">Plaza de la Catedral<br>Plasencia</p>
       </article>
       <article class="site party">
         <figure>
-          <img src="images/las-mercedes.jpg" alt="Jardín y casa de piedra del cigarral de las Mercedes">
+          <img src="images/parador.jpg" alt="Soportales del Parador de Plasencia">
         </figure>
         <p class="kind">CELEBRACIÓN</p>
-        <p class="place-name">Las Mercedes</p>
-        <p class="addr">Cigarral, carretera<br>de Piedrabuena</p>
+        <p class="place-name">Parador</p>
+        <p class="addr">Plaza de San Vicente Ferrer<br>Plasencia</p>
       </article>
     </div>
-    <iframe class="map" title="Recorrido de Santo Tomé al cigarral de las Mercedes" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?saddr=39.856822,-4.028344&amp;daddr=39.847163,-4.048762&amp;hl=es&amp;z=14&amp;output=embed"></iframe>
-    <p class="photo-note">Torre: Jose Luis Filpo Cabana, CC BY 3.0 · Finca: Turismo de Toledo</p>
+    <iframe class="map" title="Recorrido de la catedral al Parador de Plasencia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?saddr=40.027935,-6.090852&amp;daddr=40.02911,-6.094&amp;hl=es&amp;z=16&amp;output=embed"></iframe>
+    <p class="photo-note">Catedral: Jesusccastillo, CC BY-SA · Parador: Zarateman, CC BY-SA</p>
   </section>
 
-  <section class="faq" id="preguntas">
-    <h2>PREGUNTAS<br><em>frecuentes</em></h2>
-    <article class="q">
-      <b>01</b>
-      <h3>¿A qué hora hay que llegar?</h3>
-      <p>La ceremonia es a las 17:00. Llegad un poco antes, con tiempo para sentaros.</p>
-    </article>
-    <article class="q">
-      <b>02</b>
-      <h3>¿Puedo llevar acompañante?</h3>
-      <p>El sitio es el que cabe en la invitación. Si hay acompañante, el nombre aparece al confirmar.</p>
-    </article>
-    <article class="q">
-      <b>03</b>
-      <h3>¿Hay cómo volver por la noche?</h3>
-      <p>Sí. Habrá servicio de vuelta entre la finca y los hoteles. El horario se publicará aquí.</p>
-    </article>
+  <section class="preboda" id="preboda">
+    <h2>LA <em>preboda</em></h2>
+    <p><time datetime="2027-05-28T21:00">Viernes 28 · 21:00</time></p>
+    <p class="where">BAR MERCADO · PLASENCIA</p>
+    <p class="line">Aquí os esperamos: música en directo, algo para picar y muchas ganas de veros.</p>
   </section>
 
-  <section class="closing" style="--img:url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1800&q=80')">
+  <section class="closing" style="--img:url('images/benicasim.jpeg')">
     <div class="banner-copy">
       <h2>OS ESPERAMOS<em>con ganas</em></h2>
       <a class="ghost" href="#confirmar">CONFIRMAR</a>
@@ -616,13 +626,13 @@
   </section>
 
   <footer>
-    <span>Rocío y Jorge · Toledo</span>
-    <span>12 · 09 · 2027</span>
+    <span>Rocío y Jorge · Plasencia</span>
+    <span>29 · 05 · 2027</span>
   </footer>
 
   <script>
     function tick() {
-      var diff = Math.max(0, new Date("2027-09-12T17:00:00") - new Date());
+      var diff = Math.max(0, new Date("2027-05-29T17:00:00") - new Date());
       var s = Math.floor(diff / 1000);
       var parts = [
         Math.floor(s / 86400),
