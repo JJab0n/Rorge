@@ -1,95 +1,201 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rocío y Jorge</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --ink: #161616;
       --paper: #ffffff;
       --muted: #3a3a3a;
       --gray: #e6e6e6;
+      --section-space: clamp(4.5rem, 8vw, 6.5rem);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 0;
+    }
+
     body {
       background: var(--paper);
       color: var(--ink);
       font-family: "Cormorant Garamond", Palatino, serif;
     }
-    img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
-    a { color: inherit; text-decoration: none; }
-    .wrap { width: min(760px, calc(100% - 2.4rem)); margin: 0 auto; }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAVEGACIÓN FIJA */
 
     nav {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      z-index: 5;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
       display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.35rem 6vw 0.85rem;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(1.1rem, 3vw, 3.2rem);
+      padding: 1.1rem 2rem;
+      min-height: 4.2rem;
       color: #fff;
-      font-size: 1.45rem;
+      background: rgba(15, 15, 15, 0.06);
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
       font-style: italic;
-    }
-    nav::after {
-      content: "";
-      position: absolute;
-      left: 6vw; right: 6vw; bottom: 0;
-      height: 1px;
-      background: rgba(255,255,255,0.85);
+      transition:
+        background 450ms ease,
+        box-shadow 450ms ease,
+        padding 450ms ease;
     }
 
-    .hero, .banner, .story, .closing { position: relative; isolation: isolate; }
-    .hero::before, .banner::before, .story::before, .closing::before {
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1.1rem, 3vw, 3.2rem);
+    }
+
+
+    nav.scrolled {
+      background: rgba(19, 19, 19, 0.95);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+      padding-block: 0.7rem;
+    }
+
+    nav a {
+      position: relative;
+      white-space: nowrap;
+      padding: 0.25rem 0;
+    }
+
+    /* Indicador fino y discreto de sección activa. */
+    nav a {
+      border-bottom: 1px solid transparent;
+      transition: border-color 180ms ease;
+    }
+
+    nav a:hover,
+    nav a:focus-visible,
+    nav a.is-active,
+    nav a[aria-current="location"] {
+      border-bottom-color: rgba(255, 255, 255, 0.65);
+    }
+
+    nav a:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 5px;
+    }
+
+    /* FOTOGRAFÍAS */
+
+    .hero,
+    .banner,
+    .story,
+    .closing {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero::before,
+    .banner::before,
+    .story::before,
+    .closing::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: var(--img) center/cover no-repeat;
+      background: var(--img) center / cover no-repeat;
       filter: grayscale(1);
       z-index: 0;
     }
+
+    .hero::after,
+    .banner::after,
+    .story::after,
+    .closing::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.15) 40%,
+        rgba(0, 0, 0, 0.5)
+      );
+      z-index: 0;
+    }
+
+    .hero-copy,
+    .banner-copy,
+    .story-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* PORTADA */
+
     .hero {
       min-height: 100vh;
+      min-height: 100svh;
       display: grid;
       place-items: center;
       color: #fff;
       text-align: center;
       background: #111;
     }
-    .hero::after, .banner::after, .story::after, .closing::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.5));
-      z-index: 0;
-    }
+
+    .hero::before { background-position: center 44%; }
+    .banner::before { background-position: center 50%; }
+    .story::before { background-position: center 47%; }
+    .closing::before { background-position: center 50%; }
+
     .hero::after {
-      background: linear-gradient(to bottom, rgba(18,18,18,0.5) 0%, rgba(0,0,0,0.16) 26%, rgba(0,0,0,0.12) 48%, rgba(0,0,0,0.5));
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 18, 18, 0.5) 0%,
+        rgba(0, 0, 0, 0.16) 26%,
+        rgba(0, 0, 0, 0.12) 48%,
+        rgba(0, 0, 0, 0.5)
+      );
     }
-    .hero-copy, .banner-copy, .story-copy { position: relative; z-index: 1; }
+
+    .hero-copy {
+      padding: 7rem 1rem 3rem;
+    }
 
     .names {
-      font-family: "Cormorant Garamond", Palatino, serif;
       font-weight: 500;
-      font-size: clamp(5.2rem, 13vw, 8.6rem);
+      font-size: clamp(4.5rem, 13vw, 8.6rem);
       line-height: 0.82;
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
-    .script {
-      font-family: "Tangerine", cursive;
-      font-weight: 700;
-      font-style: normal;
-    }
+
     .names em {
-      display: block;
       font-family: "Tangerine", cursive;
       font-style: normal;
       font-weight: 700;
@@ -98,19 +204,67 @@
       letter-spacing: 0;
       text-transform: none;
     }
+
     .married {
       margin-top: 0.8rem;
       font-size: clamp(1.6rem, 3vw, 2.15rem);
       font-style: italic;
     }
+
     .when {
       margin-top: 0.85rem;
-      font-family: "Cormorant Garamond", Palatino, serif;
       font-size: clamp(1.4rem, 3vw, 2rem);
       letter-spacing: 0.08em;
     }
 
-    .count-block { position: relative; text-align: center; padding: 4.5rem 1rem 3.5rem; }
+    /* ENTRADA PROGRESIVA DE LOS NOMBRES */
+
+    .names .name,
+    .names em,
+    .hero-copy .married,
+    .hero-copy .when {
+      display: block;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: reveal-name 1.2s
+        cubic-bezier(.22, 1, .36, 1) forwards;
+    }
+
+    .names .name:first-child {
+      animation-delay: 0.25s;
+    }
+
+    .names em {
+      animation-delay: 0.78s;
+    }
+
+    .names .name:last-child {
+      animation-delay: 1.25s;
+    }
+
+    .hero-copy .married {
+      animation-delay: 1.85s;
+    }
+
+    .hero-copy .when {
+      animation-delay: 2.15s;
+    }
+
+    @keyframes reveal-name {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* CUENTA ATRÁS */
+
+    .count-block {
+      position: relative;
+      text-align: center;
+      padding: clamp(4.5rem, 8vw, 6rem) 1rem clamp(5rem, 10vw, 7rem);
+    }
+
     img.cat {
       width: 118px;
       height: auto;
@@ -119,6 +273,7 @@
       filter: none;
       pointer-events: none;
     }
+
     @media (min-width: 1100px) {
       img.cat {
         position: absolute;
@@ -129,13 +284,14 @@
         transform: translateY(-50%) rotate(-8deg);
       }
     }
+
     .count-title {
-      font-family: "Cormorant Garamond", Palatino, serif;
       font-weight: 400;
       font-size: clamp(2.6rem, 6vw, 4.4rem);
       letter-spacing: 0.04em;
       line-height: 0.9;
     }
+
     .count-title em {
       font-family: "Tangerine", cursive;
       font-style: normal;
@@ -143,21 +299,37 @@
       font-size: 1.35em;
       letter-spacing: 0;
     }
+
     .clock {
-      margin-top: 1.4rem;
-      font-family: "Cormorant Garamond", Palatino, serif;
-      font-size: clamp(2.8rem, 7vw, 4.6rem);
-      letter-spacing: 0.08em;
-      font-weight: 400;
-    }
-    .clock-labels {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      width: min(28rem, 90%);
-      margin: 0.2rem auto 0;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(0.25rem, 2vw, 1rem);
+      width: min(35rem, 100%);
+      margin: 1.8rem auto 0;
+      font-variant-numeric: tabular-nums;
     }
+
+    .clock-unit {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .clock-value {
+      font-size: clamp(2.35rem, 7vw, 4.6rem);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 0.015em;
+    }
+
+    .clock-label {
+      font-size: clamp(0.63rem, 1.7vw, 0.78rem);
+      letter-spacing: clamp(0.02em, 0.3vw, 0.15em);
+    }
+
+    /* SAVE THE DATE */
 
     .banner {
       min-height: 78vh;
@@ -167,13 +339,14 @@
       text-align: center;
       background: #222;
     }
+
     .save {
-      font-family: "Cormorant Garamond", Palatino, serif;
       font-size: clamp(4.5rem, 12vw, 8rem);
       font-weight: 400;
       line-height: 0.8;
       letter-spacing: 0.04em;
     }
+
     .save em {
       display: block;
       font-family: "Tangerine", cursive;
@@ -182,52 +355,75 @@
       font-size: 0.62em;
       line-height: 0.6;
     }
+
     .date-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.1rem;
       margin-top: 1.2rem;
-      font-family: "Cormorant Garamond", Palatino, serif;
       font-size: clamp(1.6rem, 3vw, 2.3rem);
       letter-spacing: 0.12em;
     }
-    .date-row b { font-weight: 400; font-size: 1.35em; letter-spacing: 0; }
-    .date-row span { opacity: 0.8; }
+
     .venue {
       margin-top: 1.1rem;
       font-size: 1.7rem;
       font-style: italic;
     }
+
     .venue small {
       display: block;
       margin-top: 0.15rem;
       font-size: 1.25rem;
     }
 
-    .invite { text-align: center; padding: 4.8rem 1rem 1rem; }
+    /* CONFIRMACIÓN */
+
+    .invite {
+      text-align: center;
+      padding: clamp(5rem, 10vw, 7.5rem) 1rem 0;
+    }
+
     .invite .please {
       font-family: "Tangerine", cursive;
       font-weight: 700;
       font-size: clamp(3.4rem, 8vw, 5.2rem);
       line-height: 0.7;
     }
+
     .invite h2 {
-      font-family: "Cormorant Garamond", Palatino, serif;
       font-weight: 400;
       font-size: clamp(4rem, 10vw, 6.5rem);
       letter-spacing: 0.06em;
       line-height: 0.85;
     }
-    .invite p { margin-top: 1rem; font-size: 1.35rem; font-style: italic; }
-    .invite strong { font-style: italic; }
+
+    .invite p {
+      margin-top: 1rem;
+      font-size: 1.35rem;
+      font-style: italic;
+    }
+
+    .invite strong {
+      font-style: italic;
+    }
+
+    /* FORMULARIO ORIGINAL: SIN CAMBIOS */
 
     form {
       width: min(680px, calc(100% - 2.4rem));
-      margin: 2.2rem auto 4rem;
+      margin: 2.2rem auto var(--section-space);
     }
-    form p, .stack { display: block; margin: 1.35rem 0 0.45rem; font-size: 1.35rem; }
-    .choices { display: grid; gap: 0.7rem; }
+
+    form p,
+    .stack {
+      display: block;
+      margin: 1.35rem 0 0.45rem;
+      font-size: 1.35rem;
+    }
+
+    .choices {
+      display: grid;
+      gap: 0.7rem;
+    }
+
     .choices label {
       display: block;
       background: #dddddd;
@@ -235,9 +431,19 @@
       font-size: 1.35rem;
       cursor: pointer;
     }
-    .choices input { position: absolute; opacity: 0; }
-    .choices label:has(input:checked) { background: #cfcfcf; outline: 1px solid #111; }
-    input[type="text"], textarea {
+
+    .choices input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .choices label:has(input:checked) {
+      background: #cfcfcf;
+      outline: 1px solid #111;
+    }
+
+    input[type="text"],
+    textarea {
       width: 100%;
       border: 1px solid #111;
       background: #fff;
@@ -246,7 +452,12 @@
       font-size: 1.2rem;
       padding: 0.75rem 0.7rem;
     }
-    textarea { min-height: 7.5rem; resize: vertical; }
+
+    textarea {
+      min-height: 7.5rem;
+      resize: vertical;
+    }
+
     button[type="submit"] {
       width: 100%;
       margin-top: 1.3rem;
@@ -259,12 +470,15 @@
       padding: 0.7rem 1rem;
       cursor: pointer;
     }
+
     .fine {
       margin-top: 0.7rem;
       text-align: center;
       font-size: 0.95rem;
       color: #666;
     }
+
+    /* HISTORIA */
 
     .story {
       min-height: 92vh;
@@ -273,30 +487,55 @@
       color: #fff;
       background: #333;
     }
-    .story-copy { padding: 12vh 8vw 8vh; max-width: 760px; }
-    .story h2, .band h2, .block h2 {
-      font-family: "Cormorant Garamond", Palatino, serif;
+
+    .story-copy {
+      padding: var(--section-space) 8vw;
+      max-width: 760px;
+    }
+
+    .story h2,
+    .band h2 {
       font-weight: 400;
       font-size: clamp(3.4rem, 8vw, 5.4rem);
       letter-spacing: 0.03em;
       line-height: 0.85;
     }
-    .story h2 em, .band h2 em, .block h2 em {
+
+    .story h2 em,
+    .band h2 em {
       font-family: "Tangerine", cursive;
       font-style: normal;
       font-weight: 700;
       letter-spacing: 0;
     }
-    .story p { margin-top: 1.2rem; font-size: 1.35rem; line-height: 1.45; max-width: 40rem; }
 
-    .band { padding: 4.5rem 1rem 3.2rem; text-align: center; background: #fff; }
+    .story p {
+      margin-top: 1.2rem;
+      font-size: 1.35rem;
+      line-height: 1.45;
+      max-width: 40rem;
+    }
+
+    /* HORARIO Y CRONOLOGÍA */
+
+    .band {
+      padding: clamp(5rem, 9vw, 7rem) 1rem;
+      text-align: center;
+      background: #fff;
+    }
+
     .day {
       width: min(640px, calc(100% - 2rem));
       margin: 2.4rem auto 0.6rem;
+      padding: 0;
       list-style: none;
       color: #161616;
     }
-    .day li { padding: 1.55rem 0.6rem; }
+
+    .day li {
+      padding: 1.55rem 0.6rem;
+    }
+
     .day time {
       display: block;
       font-style: italic;
@@ -305,6 +544,7 @@
       letter-spacing: 0.02em;
       line-height: 1;
     }
+
     .day strong {
       display: block;
       margin-top: 0.35rem;
@@ -312,6 +552,7 @@
       font-size: 0.92rem;
       letter-spacing: 0.32em;
     }
+
     .day span {
       display: block;
       margin-top: 0.35rem;
@@ -321,28 +562,61 @@
       line-height: 1.35;
     }
 
-    .contact { padding: 1rem 0 3rem; }
+    /* SEPARADOR MINIMALISTA ENTRE SECCIONES */
 
-    .places { padding: 4.8rem 1rem 3.2rem; text-align: center; background: #fff; }
+    .ornament {
+      width: 96px;
+      height: 1px;
+      margin: 0 auto;
+      opacity: 0.72;
+      background: linear-gradient(to right, transparent, #b8b8b8 50%, transparent);
+    }
+
+    /* TRANSICIÓN ENTRE EL DÍA Y EL LUGAR */
+
+    #detalles {
+      padding-bottom: clamp(2.4rem, 5vw, 3.4rem);
+    }
+
+    .ornament-day {
+      width: 104px;
+      opacity: 1;
+      background: linear-gradient(to right, transparent, #a0a0a0 50%, transparent);
+    }
+
+    .ornament-day + .places {
+      padding-top: clamp(2.8rem, 5vw, 3.8rem);
+    }
+
+    /* UBICACIONES */
+
+    .places {
+      padding: clamp(4.2rem, 7vw, 5.8rem) 1rem clamp(4.8rem, 8vw, 6.5rem);
+      text-align: center;
+      background: #fff;
+    }
+
     .places h2 {
-      font-family: "Cormorant Garamond", Palatino, serif;
       font-weight: 400;
       font-size: clamp(3.4rem, 8vw, 5.4rem);
       letter-spacing: 0.03em;
       line-height: 0.85;
     }
+
     .places h2 em {
       font-family: "Tangerine", cursive;
       font-style: normal;
       font-weight: 700;
       letter-spacing: 0;
     }
+
     .places-lead {
       margin-top: 1.15rem;
       font-size: clamp(1.7rem, 3.2vw, 2.35rem);
       line-height: 1.15;
       text-wrap: balance;
     }
+
     .sites {
       width: min(980px, 100%);
       margin: 2.6rem auto 0;
@@ -350,6 +624,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 2.8rem;
     }
+
     .site figure {
       position: relative;
       margin: 0;
@@ -357,14 +632,26 @@
       overflow: hidden;
       background: #ececec;
     }
-    .site img { position: absolute; inset: 0; }
-    .site.church img { object-position: center 58%; }
-    .site.party img { object-position: center 50%; }
+
+    .site img {
+      position: absolute;
+      inset: 0;
+    }
+
+    .site.church img {
+      object-position: center 58%;
+    }
+
+    .site.party img {
+      object-position: center 50%;
+    }
+
     .site .kind {
       margin-top: 1.15rem;
       font-size: 0.92rem;
       letter-spacing: 0.32em;
     }
+
     .site .place-name {
       font-family: "Tangerine", cursive;
       font-weight: 700;
@@ -372,7 +659,13 @@
       line-height: 0.85;
       margin-top: 0.1rem;
     }
-    .site .addr { margin-top: 0.2rem; font-size: 1.28rem; line-height: 1.3; }
+
+    .site .addr {
+      margin-top: 0.2rem;
+      font-size: 1.28rem;
+      line-height: 1.3;
+    }
+
     .photo-note {
       width: min(980px, calc(100% - 2.4rem));
       margin: 0.7rem auto 0;
@@ -380,31 +673,38 @@
       letter-spacing: 0.03em;
       color: #8a8a8a;
     }
+
     .map {
-      margin-top: 2.6rem;
+      margin: 2.6rem auto 0;
       height: 420px;
       filter: grayscale(1);
       border: 0;
       width: min(980px, calc(100% - 2.4rem));
       display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    .preboda { padding: 4.6rem 1rem 4.8rem; text-align: center; background: #fff; }
+    /* PREBODA */
+
+    .preboda {
+      padding: clamp(4.5rem, 8vw, 6.5rem) 1rem clamp(5rem, 10vw, 7.5rem);
+      text-align: center;
+      background: #fff;
+    }
+
     .preboda h2 {
-      font-family: "Cormorant Garamond", Palatino, serif;
       font-weight: 400;
       font-size: clamp(3.4rem, 8vw, 5.4rem);
       letter-spacing: 0.03em;
       line-height: 0.85;
     }
+
     .preboda h2 em {
       font-family: "Tangerine", cursive;
       font-style: normal;
       font-weight: 700;
       letter-spacing: 0;
     }
+
     .preboda time {
       display: block;
       margin-top: 1.5rem;
@@ -412,11 +712,13 @@
       font-weight: 500;
       font-size: clamp(2rem, 4vw, 2.6rem);
     }
+
     .preboda .where {
       margin-top: 0.45rem;
       font-size: 1.05rem;
       letter-spacing: 0.22em;
     }
+
     .preboda .line {
       width: min(34rem, calc(100% - 2rem));
       margin: 1.15rem auto 0;
@@ -424,6 +726,8 @@
       font-size: 1.45rem;
       line-height: 1.4;
     }
+
+    /* DESPEDIDA */
 
     .closing {
       min-height: 62vh;
@@ -433,13 +737,14 @@
       color: #fff;
       background: #222;
     }
+
     .closing h2 {
-      font-family: "Cormorant Garamond", Palatino, serif;
       font-weight: 400;
       font-size: clamp(2.8rem, 6vw, 4.4rem);
       letter-spacing: 0.04em;
       line-height: 0.9;
     }
+
     .closing em {
       display: block;
       font-family: "Tangerine", cursive;
@@ -448,6 +753,7 @@
       font-size: 1.15em;
       margin-top: 0.2rem;
     }
+
     .ghost {
       display: inline-block;
       margin-top: 1.4rem;
@@ -458,17 +764,37 @@
       font-size: 0.95rem;
     }
 
+    /* CONTACTO */
+
+    .contact {
+      padding: var(--section-space) 0;
+    }
+
     .contact .cols {
       width: min(980px, calc(100% - 2rem));
-      margin: 2.5rem auto 2rem;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1.1fr 1fr 1fr;
       gap: 1rem;
       align-items: center;
     }
-    .contact h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
-    .who { text-align: center; font-size: 1.35rem; letter-spacing: 0.12em; }
-    .who small { display: block; letter-spacing: 0.04em; font-style: italic; margin-top: 0.2rem; }
+
+    .contact h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+    }
+
+    .who {
+      text-align: center;
+      font-size: 1.35rem;
+      letter-spacing: 0.12em;
+    }
+
+    .who small {
+      display: block;
+      letter-spacing: 0.04em;
+      font-style: italic;
+      margin-top: 0.2rem;
+    }
 
     footer {
       background: #0d0d0d;
@@ -480,150 +806,489 @@
       font-size: 0.85rem;
     }
 
+    /* ANIMACIONES AL DESPLAZARSE */
+
+    .has-reveal .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        opacity 650ms ease,
+        transform 650ms cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .has-reveal .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* NAVEGACIÓN COMPACTA EN PANTALLAS PEQUEÑAS */
+
     @media (max-width: 760px) {
-      nav { font-size: 1.05rem; flex-wrap: wrap; justify-content: center; }
+      html { scroll-padding-top: 0; }
+
+      nav {
+        justify-content: center;
+        min-height: 3.15rem;
+        padding: 0.55rem 0.45rem;
+        font-size: clamp(0.76rem, 3.2vw, 0.98rem);
+        /* Contraste constante: texto legible también sobre fotografías claras. */
+        color: #fff;
+        background: rgba(19, 19, 19, 0.94);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      nav.scrolled {
+        padding-block: 0.55rem;
+        background: rgba(19, 19, 19, 0.97);
+      }
+      .nav-links {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: clamp(0.12rem, 1vw, 0.65rem);
+        flex-wrap: nowrap;
+        min-width: 0;
+      }
+      nav a { padding: 0.38rem 0; flex-shrink: 0; }
+
+      /* Línea más suave, pero claramente perceptible en móvil. */
+      nav a {
+        padding: 0.4rem 0;
+        border-bottom: 1px solid transparent;
+      }
+      nav a.is-active,
+      nav a[aria-current="location"] {
+        border-bottom-color: rgba(255, 255, 255, 0.72);
+      }
+
+      /* Ritmo uniforme en móvil: espacio deliberado alrededor de cada separador. */
+      .band { padding-top: 4.5rem; padding-bottom: 3.25rem; }
+      .ornament {
+        width: 116px;
+        height: 2px;
+        opacity: 1;
+        background: linear-gradient(to right, transparent 0%, #c4c4c4 35%, #b7b7b7 50%, #c4c4c4 65%, transparent 100%);
+      }
+      #detalles { padding-bottom: 3.25rem; }
+      .ornament-day + .places { padding-top: 3.25rem; }
+      .places { padding-bottom: 3.25rem; }
+      .ornament + .preboda { padding-top: 3.25rem; }
+      .preboda { padding-bottom: 4.5rem; }
+
+
+      /* Composición tipográfica: evitar solapamientos de las dos fuentes. */
+      .story h2, .band h2, .places h2, .preboda h2 {
+        font-size: clamp(2.8rem, 10.5vw, 4.4rem);
+        line-height: 1.02;
+        letter-spacing: 0.01em;
+        overflow-wrap: normal;
+      }
+      .story h2 em, .band h2 em, .places h2 em, .preboda h2 em {
+        display: inline-block;
+        line-height: 0.9;
+        vertical-align: baseline;
+      }
+
+      .hero::before { background-position: 52% center; }
+      .banner::before { background-position: 50% center; }
+      .story::before { background-position: 54% center; }
+      .closing::before { background-position: 50% center; }
+
+      .banner { min-height: 65svh; }
+      .story { min-height: 80svh; }
+      .closing { min-height: 54svh; }
+      .story-copy { padding-inline: 1.2rem; }
+      .names { font-size: clamp(4.2rem, 15vw, 6.5rem); }
+
       .sites { grid-template-columns: 1fr; gap: 2.6rem; }
       .contact .cols { grid-template-columns: 1fr; text-align: center; }
-      .story-copy { padding-inline: 1.2rem; }
+      .map { height: 320px; }
+      .day { width: min(640px, 100%); }
+    }
+
+    @media (max-width: 360px) {
+      nav { font-size: 0.73rem; padding-inline: 0.25rem; }
+      .nav-links { gap: 0.12rem; }
+      .story h2, .band h2, .places h2, .preboda h2 {
+        font-size: clamp(2.65rem, 10.4vw, 3.3rem);
+      }
+      .clock-label { font-size: 0.58rem; letter-spacing: 0; }
+      .clock-value { font-size: 2.15rem; }
+    }
+
+    /* ACCESIBILIDAD */
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .has-reveal .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header class="hero" id="fecha" style="--img:url('images/portada.jpg')">
-    <nav>
-      <a href="#fecha">La fecha</a>
-      <a href="#historia">Historia</a>
-      <a href="#detalles">Detalles</a>
-      <a href="#preboda">Preboda</a>
-      <a href="#confirmar">Confirmar</a>
+
+  <!-- NAVEGACIÓN FIJA: fuera de la portada para que siempre quede visible -->
+    <nav aria-label="Navegación principal">
+      <div class="nav-links" id="nav-links">
+        <a href="#fecha">La fecha</a>
+        <a href="#confirmar">Confirmar</a>
+        <a href="#historia">Historia</a>
+        <a href="#detalles">Detalles</a>
+        <a href="#preboda">Preboda</a>
+      </div>
     </nav>
+
+  <!-- PORTADA -->
+
+  <header class="hero" id="fecha"
+    style="--img:url('images/portada.jpg')">
+
     <div class="hero-copy">
-      <h1 class="names">Rocío <em>y</em> Jorge</h1>
+      <h1 class="names">
+        <span class="name">Rocío</span>
+        <em>y</em>
+        <span class="name">Jorge</span>
+      </h1>
       <p class="married">nos casamos</p>
       <p class="when">29 DE MAYO 2027</p>
     </div>
+
   </header>
 
+  <!-- CUENTA ATRÁS -->
+
   <section class="count-block">
-    <h2 class="count-title">FALTA PARA LA <em>boda</em></h2>
-    <p class="clock" id="clock">0 : 00 : 00 : 00</p>
-    <div class="clock-labels">
-      <span>DÍAS</span><span>HORAS</span><span>MINUTOS</span><span>SEGUNDOS</span>
+
+    <h2 class="count-title reveal">
+      FALTA PARA LA <em>boda</em>
+    </h2>
+
+    <div class="clock" id="clock" role="timer" aria-label="Tiempo restante para la boda">
+      <div class="clock-unit"><span class="clock-value" id="clock-days">0</span><span class="clock-label">DÍAS</span></div>
+      <div class="clock-unit"><span class="clock-value" id="clock-hours">00</span><span class="clock-label">HORAS</span></div>
+      <div class="clock-unit"><span class="clock-value" id="clock-minutes">00</span><span class="clock-label">MINUTOS</span></div>
+      <div class="clock-unit"><span class="clock-value" id="clock-seconds">00</span><span class="clock-label">SEGUNDOS</span></div>
     </div>
-    <img class="cat" src="images/luigi.png" alt="">
+
+    <img class="cat" src="images/luigi.png" alt="" width="176" decoding="async" loading="lazy">
+
   </section>
 
-  <section class="banner" style="--img:url('images/anillo.jpeg')">
-    <div class="banner-copy">
-      <p class="save"><em>save the</em>DATE</p>
+  <!-- SAVE THE DATE -->
+
+  <section class="banner"
+    style="--img:url('images/anillo.jpeg')">
+
+    <div class="banner-copy reveal">
+      <p class="save">
+        <em>save the</em>DATE
+      </p>
+
       <p class="date-row">29 DE MAYO 2027</p>
-      <p class="venue">Plasencia<small>La Catedral y el Parador</small></p>
+
+      <p class="venue">
+        Plasencia
+        <small>La Catedral y el Parador</small>
+      </p>
     </div>
+
   </section>
 
-  <section class="invite" id="confirmar">
+  <!-- CONFIRMACIÓN -->
+
+  <section class="invite reveal" id="confirmar">
     <p class="please">por favor</p>
     <h2>CONFIRMA</h2>
-    <p>Nos haría ilusión contar contigo. <strong>Antes del 15 de abril</strong>, dinos si vienes.</p>
+    <p>
+      Nos haría ilusión contar contigo.
+      <strong>Antes del 15 de abril</strong>,
+      dinos si vienes.
+    </p>
   </section>
 
   <form onsubmit="event.preventDefault(); this.querySelector('.fine').textContent = 'Recibido en esta prueba. Cuando la publiquemos, la respuesta llegará a vuestro correo.';">
+
     <p>¿Venís?</p>
+
     <div class="choices">
-      <label><input type="radio" name="asistencia" value="si" checked> Sí, allí estaré</label>
-      <label><input type="radio" name="asistencia" value="no"> No puedo ir</label>
+      <label>
+        <input type="radio" name="asistencia"
+          value="si" checked>
+        Sí, allí estaré
+      </label>
+
+      <label>
+        <input type="radio" name="asistencia"
+          value="no">
+        No puedo ir
+      </label>
     </div>
+
     <p>¿Venís con acompañante?</p>
+
     <div class="choices">
-      <label><input type="radio" name="guest" value="si"> Sí</label>
-      <label><input type="radio" name="guest" value="no" checked> No</label>
+      <label>
+        <input type="radio" name="guest" value="si">
+        Sí
+      </label>
+
+      <label>
+        <input type="radio" name="guest"
+          value="no" checked>
+        No
+      </label>
     </div>
-    <label class="stack">Nombre<input type="text" name="nombre" required></label>
-    <label class="stack">Alergias o menú<textarea name="menu"></textarea></label>
+
+    <label class="stack">
+      Nombre
+      <input type="text" name="nombre" required>
+    </label>
+
+    <label class="stack">
+      Alergias o menú
+      <textarea name="menu"></textarea>
+    </label>
+
     <button type="submit">Enviar</button>
-    <p class="fine">El formulario, por ahora, solo se enseña.</p>
+
+    <p class="fine">
+      El formulario, por ahora, solo se enseña.
+    </p>
+
   </form>
 
-  <section class="story" id="historia" style="--img:url('images/playa.jpeg')">
-    <div class="story-copy">
+  <!-- NUESTRA HISTORIA -->
+
+  <section class="story" id="historia"
+    style="--img:url('images/playa.jpeg')">
+
+    <div class="story-copy reveal">
+
       <h2>NUESTRO <em>veintinueve</em></h2>
-      <p>Nos conocimos junto a la mesa de los quesos. Había un cumpleaños, demasiada gente y un manchego que se terminó antes de que nos diéramos cuenta de que llevábamos una hora hablando. Desde entonces: dos mudanzas, un sofá heredado y el pacto de que los domingos se desayuna tarde.</p>
-      <p>El veintinueve de mayo lo contamos delante de todos. Venid hambrientos y con ganas de quedaros hasta el final.</p>
+
+      <p>
+        Nos conocimos junto a la mesa de los quesos.
+        Había un cumpleaños, demasiada gente y un
+        manchego que se terminó antes de que nos
+        diéramos cuenta de que llevábamos una hora
+        hablando. Desde entonces: dos mudanzas,
+        un sofá heredado y el pacto de que los
+        domingos se desayuna tarde.
+      </p>
+
+      <p>
+        El veintinueve de mayo lo contamos delante
+        de todos. Venid hambrientos y con ganas
+        de quedaros hasta el final.
+      </p>
+
     </div>
+
   </section>
+
+  <!-- HORARIO CON CRONOLOGÍA -->
 
   <section class="band" id="detalles">
-    <h2>EL DÍA <em>horario</em></h2>
+
+    <h2 class="reveal">
+      EL DÍA <em>horario</em>
+    </h2>
+
     <ol class="day">
-      <li>
+
+      <li class="reveal">
         <time>17:00</time>
         <strong>CEREMONIA</strong>
-        <span>Corta. Lo hemos cronometrado por el bien de todos.</span>
+        <span>
+          Corta. Lo hemos cronometrado
+          por el bien de todos.
+        </span>
       </li>
-      <li>
+
+      <li class="reveal">
         <time>18:00</time>
         <strong>CÓCTEL</strong>
-        <span>Fotos, jardín, y el primo al que no veías desde 2014.</span>
+        <span>
+          Fotos, jardín, y el primo al que
+          no veías desde 2014.
+        </span>
       </li>
-      <li>
+
+      <li class="reveal">
         <time>20:30</time>
         <strong>CENA</strong>
-        <span>Sentados, con mantel y sin prisa. Avisadnos de alergias.</span>
+        <span>
+          Sentados, con mantel y sin prisa.
+          Avisadnos de alergias.
+        </span>
       </li>
-      <li>
+
+      <li class="reveal">
         <time>23:30</time>
         <strong>BAILE</strong>
-        <span>Hasta que alguien pida la canción que debimos vetar.</span>
+        <span>
+          Hasta que alguien pida la canción
+          que debimos vetar.
+        </span>
       </li>
+
     </ol>
+
   </section>
+
+  <!-- SEPARADOR ENTRE EL DÍA Y EL LUGAR -->
+
+  <div class="ornament ornament-day" aria-hidden="true"></div>
+
+  <!-- UBICACIONES -->
 
   <section class="places" id="lugar">
-    <h2>EL <em>lugar</em></h2>
-    <p class="places-lead">Dos sitios, un mismo día.</p>
+
+    <h2 class="reveal">
+      EL <em>lugar</em>
+    </h2>
+
+    <p class="places-lead">
+      Dos sitios, un mismo día.
+    </p>
+
     <div class="sites">
-      <article class="site church">
+
+      <article class="site church reveal">
         <figure>
-          <img src="images/catedral.jpg" alt="Fachada de la catedral de Plasencia">
+          <img
+            src="images/catedral.jpg" loading="lazy" decoding="async"
+            alt="Fachada de la catedral de Plasencia">
         </figure>
+
         <p class="kind">CEREMONIA</p>
         <p class="place-name">Catedral</p>
-        <p class="addr">Plaza de la Catedral<br>Plasencia</p>
+        <p class="addr">
+          Plaza de la Catedral<br>
+          Plasencia
+        </p>
       </article>
-      <article class="site party">
+
+      <article class="site party reveal">
         <figure>
-          <img src="images/parador.jpg" alt="Soportales del Parador de Plasencia">
+          <img
+            src="images/parador.jpg" loading="lazy" decoding="async"
+            alt="Soportales del Parador de Plasencia">
         </figure>
+
         <p class="kind">CELEBRACIÓN</p>
         <p class="place-name">Parador</p>
-        <p class="addr">Plaza de San Vicente Ferrer<br>Plasencia</p>
+        <p class="addr">
+          Plaza de San Vicente Ferrer<br>
+          Plasencia
+        </p>
       </article>
+
     </div>
-    <iframe class="map" title="Recorrido de la catedral al Parador de Plasencia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?saddr=40.027935,-6.090852&amp;daddr=40.02911,-6.094&amp;hl=es&amp;z=16&amp;output=embed"></iframe>
-    <p class="photo-note">Catedral: Jesusccastillo, CC BY-SA · Parador: Zarateman, CC BY-SA</p>
+
+    <iframe
+      class="map"
+      title="Recorrido de la catedral al Parador de Plasencia"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://maps.google.com/maps?saddr=40.027935,-6.090852&amp;daddr=40.02911,-6.094&amp;hl=es&amp;z=16&amp;output=embed">
+    </iframe>
+
+    <p class="photo-note">
+      Catedral: Jesusccastillo, CC BY-SA ·
+      Parador: Zarateman, CC BY-SA
+    </p>
+
   </section>
+
+  <!-- SEPARADOR ORNAMENTAL -->
+
+  <div class="ornament" aria-hidden="true"></div>
+
+  <!-- PREBODA -->
 
   <section class="preboda" id="preboda">
-    <h2>LA <em>preboda</em></h2>
-    <p><time datetime="2027-05-28T21:00">Viernes 28 · 21:00</time></p>
-    <p class="where">BAR MERCADO · PLASENCIA</p>
-    <p class="line">Aquí os esperamos: música en directo, algo para picar y muchas ganas de veros.</p>
+
+    <h2 class="reveal">
+      LA <em>preboda</em>
+    </h2>
+
+    <p class="reveal">
+      <time datetime="2027-05-28T21:00">
+        Viernes 28 · 21:00
+      </time>
+    </p>
+
+    <p class="where">
+      BAR MERCADO · PLASENCIA
+    </p>
+
+    <p class="line">
+      Aquí os esperamos: música en directo,
+      algo para picar y muchas ganas de veros.
+    </p>
+
   </section>
 
-  <section class="closing" style="--img:url('images/benicasim.jpeg')">
-    <div class="banner-copy">
-      <h2>OS ESPERAMOS<em>con ganas</em></h2>
-      <a class="ghost" href="#confirmar">CONFIRMAR</a>
+  <!-- DESPEDIDA -->
+
+  <section class="closing"
+    style="--img:url('images/benicasim.jpeg')">
+
+    <div class="banner-copy reveal">
+
+      <h2>
+        OS ESPERAMOS
+        <em>con ganas</em>
+      </h2>
+
+      <a class="ghost" href="#confirmar">
+        CONFIRMAR
+      </a>
+
     </div>
+
   </section>
+
+  <!-- CONTACTO -->
 
   <section class="contact">
+
     <div class="cols">
-      <h2>ESCRÍBENOS</h2>
-      <p class="who">Rocío<small>teléfono</small></p>
-      <p class="who">Jorge<small>teléfono</small></p>
+
+      <h2 class="reveal">ESCRÍBENOS</h2>
+
+      <p class="who">
+        Rocío
+        <small>teléfono</small>
+      </p>
+
+      <p class="who">
+        Jorge
+        <small>teléfono</small>
+      </p>
+
     </div>
+
   </section>
+
+  <!-- PIE DE PÁGINA -->
 
   <footer>
     <span>Rocío y Jorge · Plasencia</span>
@@ -631,19 +1296,176 @@
   </footer>
 
   <script>
+
+    /* MENÚ FIJO */
+
+    const nav = document.querySelector("nav");
+    const navLinks = Array.from(nav.querySelectorAll('a[href^="#"]'));
+    const navSections = navLinks.map(link => {
+      const section = document.getElementById(link.hash.slice(1));
+      if (!section) return null;
+      const title = section.querySelector('h1, h2') || section;
+      return { link, section, title };
+    }).filter(Boolean);
+
+    function pageTop(element) {
+      return element.getBoundingClientRect().top + window.scrollY;
+    }
+
+    function navClearance() {
+      // Medimos la altura REAL, no una suposición de escritorio.
+      return nav.getBoundingClientRect().height + 14;
+    }
+
+    function setActiveLink(link) {
+      navLinks.forEach(anchor => {
+        const active = anchor === link;
+        anchor.classList.toggle('is-active', active);
+        if (active) anchor.setAttribute('aria-current', 'location');
+        else anchor.removeAttribute('aria-current');
+      });
+    }
+
+    function updateNavigation() {
+      nav.classList.toggle('scrolled', window.scrollY > 55);
+      const visibleLine = window.scrollY + navClearance() + 8;
+      let active = navSections[0];
+      for (const item of navSections) {
+        if (pageTop(item.title) <= visibleLine) active = item;
+      }
+      if (active) setActiveLink(active.link);
+    }
+
+    function scrollToTitle(item) {
+      // Evita que una animación de entrada cambie la posición del título
+      // mientras Safari/Chrome móvil calculan el salto.
+      const reveal = item.title.closest('.reveal');
+      if (reveal) reveal.classList.add('is-visible');
+      const calculate = () => item.section.id === 'fecha' ? 0 :
+        Math.max(0, Math.round(pageTop(item.title) - navClearance()));
+
+      // Se fija la sección elegida antes de actualizar el scroll.
+      setActiveLink(item.link);
+      window.scrollTo({ top: calculate(), behavior: 'instant' });
+      // Reajuste tras la actualización del viewport móvil y del menú.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const targetY = calculate();
+          if (Math.abs(window.scrollY - targetY) > 1) window.scrollTo(0, targetY);
+          updateNavigation();
+        });
+      });
+    }
+
+    navSections.forEach(item => {
+      item.link.addEventListener('click', event => {
+        event.preventDefault();
+        if (window.location.hash !== item.link.hash) {
+          history.pushState(null, '', item.link.hash);
+        }
+        scrollToTitle(item);
+      });
+    });
+
+    function navigateFromHash() {
+      const item = navSections.find(x => x.link.hash === window.location.hash);
+      if (item) scrollToTitle(item);
+      else updateNavigation();
+    }
+
+    let scrollScheduled = false;
+    window.addEventListener('scroll', () => {
+      if (!scrollScheduled) {
+        scrollScheduled = true;
+        requestAnimationFrame(() => {
+          updateNavigation();
+          scrollScheduled = false;
+        });
+      }
+    }, { passive: true });
+    window.addEventListener('resize', updateNavigation, { passive: true });
+    window.addEventListener('hashchange', navigateFromHash);
+    window.addEventListener('popstate', navigateFromHash);
+    window.addEventListener('load', navigateFromHash);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        if (window.location.hash) navigateFromHash();
+        else updateNavigation();
+      });
+    }
+    updateNavigation();
+
+    /* ANIMACIONES AL DESPLAZARSE */
+
+    const revealItems =
+      document.querySelectorAll(".reveal");
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if ("IntersectionObserver" in window && !reduceMotion) {
+
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.05,
+          rootMargin: "0px 0px -15px 0px"
+        }
+      );
+
+      revealItems.forEach(item => {
+        revealObserver.observe(item);
+      });
+
+      document.documentElement.classList.add(
+        "has-reveal"
+      );
+    }
+
+    /* CUENTA ATRÁS ORIGINAL */
+
     function tick() {
-      var diff = Math.max(0, new Date("2027-05-29T13:00:00+02:00") - new Date());
+
+      var diff = Math.max(
+        0,
+        new Date("2027-05-29T13:00:00+02:00") -
+        new Date()
+      );
+
       var s = Math.floor(diff / 1000);
+
       var parts = [
         Math.floor(s / 86400),
-        String(Math.floor(s / 3600) % 24).padStart(2, "0"),
-        String(Math.floor(s / 60) % 60).padStart(2, "0"),
-        String(s % 60).padStart(2, "0")
+        String(Math.floor(s / 3600) % 24)
+          .padStart(2, "0"),
+        String(Math.floor(s / 60) % 60)
+          .padStart(2, "0"),
+        String(s % 60)
+          .padStart(2, "0")
       ];
-      document.getElementById("clock").textContent = parts.join(" : ");
+
+      document.getElementById("clock-days").textContent = parts[0];
+      document.getElementById("clock-hours").textContent = parts[1];
+      document.getElementById("clock-minutes").textContent = parts[2];
+      document.getElementById("clock-seconds").textContent = parts[3];
     }
+
     tick();
     setInterval(tick, 1000);
+
   </script>
+
 </body>
 </html>
