@@ -69,8 +69,7 @@
       font-style: italic;
       transition:
         background 450ms ease,
-        box-shadow 450ms ease,
-        padding 450ms ease;
+        box-shadow 450ms ease;
     }
 
     .nav-links {
@@ -443,7 +442,8 @@
     }
 
     input[type="text"],
-    textarea {
+    textarea,
+    select {
       width: 100%;
       border: 1px solid #111;
       background: #fff;
@@ -453,7 +453,19 @@
       padding: 0.75rem 0.7rem;
     }
 
+    select {
+      display: block;
+      margin-top: 0.75rem;
+      cursor: pointer;
+    }
+
+    select:invalid {
+      color: #8a8a8a;
+    }
+
     textarea {
+      display: block;
+      margin-top: 0.75rem;
       min-height: 7.5rem;
       resize: vertical;
     }
@@ -476,6 +488,20 @@
       text-align: center;
       font-size: 0.95rem;
       color: #666;
+    }
+
+    .bus-note {
+      display: block;
+      margin: 0.2rem 0 0;
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.25;
+      color: #666;
+    }
+
+    .paso[hidden],
+    form button[hidden] {
+      display: none !important;
     }
 
     /* HISTORIA */
@@ -666,6 +692,14 @@
       line-height: 1.3;
     }
 
+    .site .blurb {
+      width: min(26rem, 100%);
+      margin: 0.85rem auto 0;
+      font-style: italic;
+      font-size: 1.28rem;
+      line-height: 1.35;
+    }
+
     .photo-note {
       width: min(980px, calc(100% - 2.4rem));
       margin: 0.7rem auto 0;
@@ -720,11 +754,15 @@
     }
 
     .preboda .line {
-      width: min(34rem, calc(100% - 2rem));
+      width: min(38rem, calc(100% - 2rem));
       margin: 1.15rem auto 0;
       font-style: italic;
       font-size: 1.45rem;
       line-height: 1.4;
+    }
+
+    .preboda .line + .line {
+      margin-top: 0.75rem;
     }
 
     /* DESPEDIDA */
@@ -1017,55 +1055,81 @@
     <h2>CONFIRMA</h2>
     <p>
       Nos haría ilusión contar contigo.
-      <strong>Antes del 15 de abril</strong>,
+      <strong>Antes del 1 de marzo</strong>,
       dinos si vienes.
     </p>
   </section>
 
   <form onsubmit="event.preventDefault(); this.querySelector('.fine').textContent = 'Recibido en esta prueba. Cuando la publiquemos, la respuesta llegará a vuestro correo.';">
 
-    <p>¿Venís?</p>
-
-    <div class="choices">
-      <label>
-        <input type="radio" name="asistencia"
-          value="si" checked>
-        Sí, allí estaré
-      </label>
-
-      <label>
-        <input type="radio" name="asistencia"
-          value="no">
-        No puedo ir
-      </label>
-    </div>
-
-    <p>¿Venís con acompañante?</p>
-
-    <div class="choices">
-      <label>
-        <input type="radio" name="guest" value="si">
-        Sí
-      </label>
-
-      <label>
-        <input type="radio" name="guest"
-          value="no" checked>
-        No
-      </label>
-    </div>
-
     <label class="stack">
-      Nombre
+      Nombre y apellidos
       <input type="text" name="nombre" required>
     </label>
 
     <label class="stack">
-      Alergias o menú
-      <textarea name="menu"></textarea>
+      ¿Vienes?
+      <select name="asistencia" required>
+        <option value="" selected disabled>Elige una opción</option>
+        <option value="si">Sí, allí estaré</option>
+        <option value="no">No puedo ir</option>
+      </select>
     </label>
 
-    <button type="submit">Enviar</button>
+    <div class="paso" data-paso="menu" hidden>
+      <label class="stack">
+        ¿Tienes alguna alergia, intolerancia o prefieres menú vegano?
+        <textarea name="menu"></textarea>
+      </label>
+    </div>
+
+    <div class="paso" data-paso="guest" hidden>
+      <label class="stack">
+        ¿Vienes acompañado?
+        <select name="guest" required>
+          <option value="" selected disabled>Elige una opción</option>
+          <option value="si">Sí, vengo acompañado</option>
+          <option value="no">No, vengo solo</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="paso" data-paso="acompanante" hidden>
+      <label class="stack">
+        Nombre y apellidos del acompañante
+        <input type="text" name="acompanante" required>
+      </label>
+    </div>
+
+    <div class="paso" data-paso="menu-acompanante" hidden>
+      <label class="stack">
+        ¿Tiene alguna alergia, intolerancia o prefiere menú vegano?
+        <textarea name="menu-acompanante"></textarea>
+      </label>
+    </div>
+
+    <div class="paso" data-paso="cierre" hidden>
+      <label class="stack">
+        <span class="pregunta-bus">¿Necesitas bus?</span>
+        <small class="bus-note">El bus solo está disponible para las personas de Jaraíz, el sábado 29 de mayo (ida/vuelta).</small>
+        <select name="bus" required>
+          <option value="" selected disabled>Elige una opción</option>
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+      </label>
+
+      <label class="stack">
+        <span class="pregunta-preboda">¿Vienes a la preboda?</span>
+        <select name="preboda" required>
+          <option value="" selected disabled>Elige una opción</option>
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+      </label>
+    </div>
+
+    <button type="submit" hidden>Enviar</button>
 
     <p class="fine">
       El formulario, por ahora, solo se enseña.
@@ -1083,19 +1147,19 @@
       <h2>NUESTRO <em>veintinueve</em></h2>
 
       <p>
-        Nos conocimos junto a la mesa de los quesos.
-        Había un cumpleaños, demasiada gente y un
-        manchego que se terminó antes de que nos
-        diéramos cuenta de que llevábamos una hora
-        hablando. Desde entonces: dos mudanzas,
-        un sofá heredado y el pacto de que los
-        domingos se desayuna tarde.
+        Aquí, entre calles llenas de historias que nos vieron crecer y rincones que siempre serán casa, empezó todo. Sin grandes planes, sin imaginar demasiado, en una de esas noches de conversaciones interminables.
       </p>
 
       <p>
-        El veintinueve de mayo lo contamos delante
-        de todos. Venid hambrientos y con ganas
-        de quedaros hasta el final.
+        Un veintinueve de mayo que, sin saberlo, nos estaba cambiando la vida. Y que terminó convirtiéndose en una promesa; en nuestra forma de decirnos que sí, de elegirnos, de cuidarnos y de seguir encontrándonos, día tras día.
+      </p>
+
+      <p>
+        Catorce años después, volvemos a tener una cita con ese día y con esa ciudad. Pero esta vez queremos que formes parte de nuestro veintinueve.
+      </p>
+
+      <p>
+        Porque hay historias que empiezan siendo de dos, pero que no se entienden sin todas las personas que las acompañan. Y no imaginamos una forma más bonita de celebrar la nuestra que contigo.
       </p>
 
     </div>
@@ -1113,38 +1177,50 @@
     <ol class="day">
 
       <li class="reveal">
-        <time>17:00</time>
+        <time>11:45</time>
+        <strong>BUS</strong>
+        <span>
+          ¡Empieza la aventura! Desde Jaraíz de la Vera llega una buena parte de nuestra gente favorita. Preparad las ganas de pasarlo bien, que hoy tenemos una cita muy especial.
+        </span>
+      </li>
+
+      <li class="reveal">
+        <time>13:00</time>
         <strong>CEREMONIA</strong>
         <span>
-          Corta. Lo hemos cronometrado
-          por el bien de todos.
+          Dos personas, un «sí» y mil aventuras por delante. En un lugar tan especial como la Catedral de Plasencia, nos prometemos compartir la vida… ¡y todas las locuras que vengan con ella!
         </span>
       </li>
 
       <li class="reveal">
-        <time>18:00</time>
+        <time>15:00</time>
         <strong>CÓCTEL</strong>
         <span>
-          Fotos, jardín, y el primo al que
-          no veías desde 2014.
+          ¡Que empiece el brindis por los novios! Los nervios ya han pasado, los anillos están puestos y ahora toca disfrutar, picar algo y celebrar que por fin ha llegado el gran día.
         </span>
       </li>
 
       <li class="reveal">
-        <time>20:30</time>
-        <strong>CENA</strong>
+        <time>16:30</time>
+        <strong>COMIDA</strong>
         <span>
-          Sentados, con mantel y sin prisa.
-          Avisadnos de alergias.
+          El amor alimenta, pero esto también. Después de tantas emociones, toca sentarse, disfrutar de un buen banquete y coger fuerzas… que todavía queda mucha boda por delante.
         </span>
       </li>
 
       <li class="reveal">
         <time>23:30</time>
-        <strong>BAILE</strong>
+        <strong>CELEBRACIÓN</strong>
         <span>
-          Hasta que alguien pida la canción
-          que debimos vetar.
+          Y vivieron felices… ¡y bailaron hasta el último minuto del día! Ha llegado el momento de dejar las formalidades a un lado, sacar los mejores pasos (o intentarlo) y convertir este día en un recuerdo inolvidable.
+        </span>
+      </li>
+
+      <li class="reveal">
+        <time>00:00</time>
+        <strong>BUS</strong>
+        <span>
+          Porque todo lo bueno se acaba… ¡menos las anécdotas de esta noche! Toca volver al pueblo más bonito del mundo con los pies cansados, alguna copa de más y una sonrisa de oreja a oreja.
         </span>
       </li>
 
@@ -1183,6 +1259,9 @@
           Plaza de la Catedral<br>
           Plasencia
         </p>
+        <p class="blurb">
+          Un lugar muy especial donde dos catedrales se unen en una: la Vieja y la Nueva. ¡Y donde por fin nos daremos el sí, quiero!
+        </p>
       </article>
 
       <article class="site party reveal">
@@ -1198,6 +1277,9 @@
           Plaza de San Vicente Ferrer<br>
           Plasencia
         </p>
+        <p class="blurb">
+          Un antiguo convento del siglo XV convertido en un lugar lleno de magia. Claustros, piedra, galerías y rincones llenos de encanto para brindar, bailar y, ¡darlo todo!
+        </p>
       </article>
 
     </div>
@@ -1209,11 +1291,6 @@
       referrerpolicy="no-referrer-when-downgrade"
       src="https://maps.google.com/maps?saddr=40.027935,-6.090852&amp;daddr=40.02911,-6.094&amp;hl=es&amp;z=16&amp;output=embed">
     </iframe>
-
-    <p class="photo-note">
-      Catedral: Jesusccastillo, CC BY-SA ·
-      Parador: Zarateman, CC BY-SA
-    </p>
 
   </section>
 
@@ -1236,12 +1313,15 @@
     </p>
 
     <p class="where">
-      BAR MERCADO · PLASENCIA
+      BAR MERCADO<br>
+      Plasencia
     </p>
 
     <p class="line">
-      Aquí os esperamos: música en directo,
-      algo para picar y muchas ganas de veros.
+      Aquí os esperamos con un poquito de flamenquito en directo, que siempre alegra el corazón, algo rico para picar y muchas ganas de veros.
+    </p>
+    <p class="line">
+      Está todo al ladito de la Catedral, ¡así que no tiene pérdida!
     </p>
 
   </section>
@@ -1276,12 +1356,12 @@
 
       <p class="who">
         Rocío
-        <small>teléfono</small>
+        <small>671233905</small>
       </p>
 
       <p class="who">
         Jorge
-        <small>teléfono</small>
+        <small>686829459</small>
       </p>
 
     </div>
@@ -1297,6 +1377,58 @@
 
   <script>
 
+    /* FORMULARIO: cada respuesta abre solo la pregunta siguiente */
+
+    const asistencia = document.querySelector('select[name="asistencia"]');
+    const pasoMenu = document.querySelector('[data-paso="menu"]');
+    const pasoGuest = document.querySelector('[data-paso="guest"]');
+    const pasoAcompanante = document.querySelector('[data-paso="acompanante"]');
+    const pasoMenuAcompanante = document.querySelector('[data-paso="menu-acompanante"]');
+    const pasoCierre = document.querySelector('[data-paso="cierre"]');
+    const guest = pasoGuest.querySelector("select");
+    const bus = pasoCierre.querySelector('select[name="bus"]');
+    const preboda = pasoCierre.querySelector('select[name="preboda"]');
+    const preguntaBus = pasoCierre.querySelector(".pregunta-bus");
+    const preguntaPreboda = pasoCierre.querySelector(".pregunta-preboda");
+    const enviar = document.querySelector('form button[type="submit"]');
+
+    function mostrarPaso(paso, visible) {
+      paso.hidden = !visible;
+      paso.querySelectorAll("input, textarea, select").forEach(field => {
+        field.disabled = !visible;
+      });
+    }
+
+    function elegido(select) {
+      return select.value !== "";
+    }
+
+    function actualizarFormulario() {
+      const viene = asistencia.value === "si";
+      const noViene = asistencia.value === "no";
+      const conAcompanante = viene && guest.value === "si";
+      const sinAcompanante = viene && guest.value === "no";
+      const respondioAcompanante = conAcompanante || sinAcompanante;
+      const desplegables = [asistencia];
+
+      if (viene) desplegables.push(guest);
+      if (respondioAcompanante) desplegables.push(bus, preboda);
+
+      mostrarPaso(pasoMenu, viene);
+      mostrarPaso(pasoGuest, viene);
+      mostrarPaso(pasoAcompanante, conAcompanante);
+      mostrarPaso(pasoMenuAcompanante, conAcompanante);
+      mostrarPaso(pasoCierre, respondioAcompanante);
+      preguntaBus.textContent = conAcompanante ? "¿Necesitáis bus?" : "¿Necesitas bus?";
+      preguntaPreboda.textContent = conAcompanante ? "¿Venís a la preboda?" : "¿Vienes a la preboda?";
+      enviar.hidden = !desplegables.every(elegido);
+    }
+
+    asistencia.addEventListener("change", actualizarFormulario);
+    guest.addEventListener("change", actualizarFormulario);
+    bus.addEventListener("change", actualizarFormulario);
+    preboda.addEventListener("change", actualizarFormulario);
+
     /* MENÚ FIJO */
 
     const nav = document.querySelector("nav");
@@ -1304,7 +1436,7 @@
     const navSections = navLinks.map(link => {
       const section = document.getElementById(link.hash.slice(1));
       if (!section) return null;
-      const title = section.querySelector('h1, h2') || section;
+      const title = section.querySelector('.please, h1, h2') || section;
       return { link, section, title };
     }).filter(Boolean);
 
@@ -1337,23 +1469,31 @@
     }
 
     function scrollToTitle(item) {
-      // Evita que una animación de entrada cambie la posición del título
-      // mientras Safari/Chrome móvil calculan el salto.
       const reveal = item.title.closest('.reveal');
-      if (reveal) reveal.classList.add('is-visible');
-      const calculate = () => item.section.id === 'fecha' ? 0 :
+      if (reveal) {
+        reveal.style.transition = 'none';
+        reveal.classList.add('is-visible');
+      }
+      const toTop = item.section.id === 'fecha';
+      nav.classList.toggle('scrolled', !toTop);
+
+      const root = document.documentElement;
+      const previousScrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      void root.offsetWidth;
+
+      const calculate = () => toTop ? 0 :
         Math.max(0, Math.round(pageTop(item.title) - navClearance()));
 
-      // Se fija la sección elegida antes de actualizar el scroll.
+      const jump = () => window.scrollTo({ top: calculate(), behavior: 'instant' });
+
       setActiveLink(item.link);
-      window.scrollTo({ top: calculate(), behavior: 'instant' });
-      // Reajuste tras la actualización del viewport móvil y del menú.
+      jump();
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const targetY = calculate();
-          if (Math.abs(window.scrollY - targetY) > 1) window.scrollTo(0, targetY);
-          updateNavigation();
-        });
+        jump();
+        if (reveal) reveal.style.transition = '';
+        root.style.scrollBehavior = previousScrollBehavior;
+        updateNavigation();
       });
     }
 
