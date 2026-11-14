@@ -373,6 +373,25 @@
       font-size: 1.25rem;
     }
 
+    .cal {
+      margin-top: 1.45rem;
+      font-size: 0.92rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .cal span {
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+    }
+
+    .cal a {
+      margin: 0 0.55rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+    }
+
     /* CONFIRMACIÓN */
 
     .invite {
@@ -1044,6 +1063,13 @@
         Plasencia
         <small>La Catedral y el Parador</small>
       </p>
+
+      <p class="cal">
+        <span>Añadir al calendario</span>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Boda%20de%20Roc%C3%ADo%20y%20Jorge&amp;dates=20270529T110000Z/20270529T220000Z&amp;details=Ceremonia%20a%20las%2013%3A00%20en%20la%20Catedral%20de%20Plasencia.%20Despu%C3%A9s%2C%20celebraci%C3%B3n%20en%20el%20Parador.&amp;location=Catedral%20de%20Plasencia%2C%20Plaza%20de%20la%20Catedral%2C%20Plasencia&amp;ctz=Europe%2FMadrid" target="_blank" rel="noopener">Google</a>
+        <a href="https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&amp;rru=addevent&amp;startdt=2027-05-29T13:00:00%2B02:00&amp;enddt=2027-05-30T00:00:00%2B02:00&amp;subject=Boda%20de%20Roc%C3%ADo%20y%20Jorge&amp;body=Ceremonia%20a%20las%2013%3A00%20en%20la%20Catedral%20de%20Plasencia.%20Despu%C3%A9s%2C%20celebraci%C3%B3n%20en%20el%20Parador.&amp;location=Catedral%20de%20Plasencia%2C%20Plaza%20de%20la%20Catedral%2C%20Plasencia" target="_blank" rel="noopener">Outlook</a>
+        <a href="boda.ics" download="boda-rocio-y-jorge.ics">Apple</a>
+      </p>
     </div>
 
   </section>
@@ -1054,7 +1080,7 @@
     <p class="please">por favor</p>
     <h2>CONFIRMA</h2>
     <p>
-      Nos haría ilusión contar contigo.
+      Nos encantaría contar contigo.
       <strong>Antes del 1 de marzo</strong>,
       dinos si vienes.
     </p>
@@ -1085,18 +1111,18 @@
 
     <div class="paso" data-paso="guest" hidden>
       <label class="stack">
-        ¿Vienes acompañado?
+        ¿Vienes con acompañante?
         <select name="guest" required>
           <option value="" selected disabled>Elige una opción</option>
-          <option value="si">Sí, vengo acompañado</option>
-          <option value="no">No, vengo solo</option>
+          <option value="si">Sí</option>
+          <option value="no">No</option>
         </select>
       </label>
     </div>
 
     <div class="paso" data-paso="acompanante" hidden>
       <label class="stack">
-        Nombre y apellidos del acompañante
+        Nombre y apellidos de tu acompañante
         <input type="text" name="acompanante" required>
       </label>
     </div>
@@ -1110,8 +1136,8 @@
 
     <div class="paso" data-paso="cierre" hidden>
       <label class="stack">
-        <span class="pregunta-bus">¿Necesitas bus?</span>
-        <small class="bus-note">El bus solo está disponible para las personas de Jaraíz, el sábado 29 de mayo (ida/vuelta).</small>
+        <span class="pregunta-bus">¿Necesitas autobus?</span>
+        <small class="bus-note">El autobus solo está disponible para las personas de Jaraíz de la Vera, el sábado 29 de mayo (ida y vuelta).</small>
         <select name="bus" required>
           <option value="" selected disabled>Elige una opción</option>
           <option value="si">Sí</option>
@@ -1147,6 +1173,10 @@
       <h2>NUESTRO <em>veintinueve</em></h2>
 
       <p>
+        Plasencia guarda nuestro veintinueve.
+      </p>
+
+      <p>
         Aquí, entre calles llenas de historias que nos vieron crecer y rincones que siempre serán casa, empezó todo. Sin grandes planes, sin imaginar demasiado, en una de esas noches de conversaciones interminables.
       </p>
 
@@ -1178,9 +1208,9 @@
 
       <li class="reveal">
         <time>11:45</time>
-        <strong>BUS</strong>
+        <strong>AUTOBUS</strong>
         <span>
-          ¡Empieza la aventura! Desde Jaraíz de la Vera llega una buena parte de nuestra gente favorita. Preparad las ganas de pasarlo bien, que hoy tenemos una cita muy especial.
+          Desde Jaraíz de la Vera llega una buena parte de nuestra gente favorita. 
         </span>
       </li>
 
@@ -1188,39 +1218,22 @@
         <time>13:00</time>
         <strong>CEREMONIA</strong>
         <span>
-          Dos personas, un «sí» y mil aventuras por delante. En un lugar tan especial como la Catedral de Plasencia, nos prometemos compartir la vida… ¡y todas las locuras que vengan con ella!
+          Nos prometemos compartir la vida… ¡y todas las locuras que vengan con ella!
         </span>
       </li>
 
       <li class="reveal">
-        <time>15:00</time>
-        <strong>CÓCTEL</strong>
-        <span>
-          ¡Que empiece el brindis por los novios! Los nervios ya han pasado, los anillos están puestos y ahora toca disfrutar, picar algo y celebrar que por fin ha llegado el gran día.
-        </span>
-      </li>
-
-      <li class="reveal">
-        <time>16:30</time>
-        <strong>COMIDA</strong>
-        <span>
-          El amor alimenta, pero esto también. Después de tantas emociones, toca sentarse, disfrutar de un buen banquete y coger fuerzas… que todavía queda mucha boda por delante.
-        </span>
-      </li>
-
-      <li class="reveal">
-        <time>23:30</time>
+        <time>14:30</time>
         <strong>CELEBRACIÓN</strong>
         <span>
-          Y vivieron felices… ¡y bailaron hasta el último minuto del día! Ha llegado el momento de dejar las formalidades a un lado, sacar los mejores pasos (o intentarlo) y convertir este día en un recuerdo inolvidable.
-        </span>
+          Los nervios ya han pasado, los anillos están puestos y ahora toca disfrutar.        </span>
       </li>
 
       <li class="reveal">
         <time>00:00</time>
-        <strong>BUS</strong>
+        <strong>AUTOBUS</strong>
         <span>
-          Porque todo lo bueno se acaba… ¡menos las anécdotas de esta noche! Toca volver al pueblo más bonito del mundo con los pies cansados, alguna copa de más y una sonrisa de oreja a oreja.
+          Pies cansados, alguna copa de más y una sonrisa de oreja a oreja.
         </span>
       </li>
 
@@ -1260,7 +1273,7 @@
           Plasencia
         </p>
         <p class="blurb">
-          Un lugar muy especial donde dos catedrales se unen en una: la Vieja y la Nueva. ¡Y donde por fin nos daremos el sí, quiero!
+          Un lugar muy especial donde dos catedrales se unen en una: la Vieja y la Nueva. Y donde nos daremos el sí, quiero.
         </p>
       </article>
 
@@ -1278,8 +1291,7 @@
           Plasencia
         </p>
         <p class="blurb">
-          Un antiguo convento del siglo XV convertido en un lugar lleno de magia. Claustros, piedra, galerías y rincones llenos de encanto para brindar, bailar y, ¡darlo todo!
-        </p>
+          Un antiguo convento del siglo XV convertido en un lugar lleno de magia. Claustros, piedra, galerías y rincones llenos de encanto para darlo todo.
       </article>
 
     </div>
@@ -1313,8 +1325,7 @@
     </p>
 
     <p class="where">
-      BAR MERCADO<br>
-      Plasencia
+      BAR MERCADO
     </p>
 
     <p class="line">
@@ -1335,7 +1346,7 @@
 
       <h2>
         OS ESPERAMOS
-        <em>con ganas</em>
+        <em>con muchas ganas</em>
       </h2>
 
       <a class="ghost" href="#confirmar">
@@ -1391,6 +1402,42 @@
     const preguntaBus = pasoCierre.querySelector(".pregunta-bus");
     const preguntaPreboda = pasoCierre.querySelector(".pregunta-preboda");
     const enviar = document.querySelector('form button[type="submit"]');
+    let prebodaConAcompanante = null;
+
+    function opcionesPreboda(conAcompanante) {
+      if (prebodaConAcompanante === conAcompanante) return;
+      prebodaConAcompanante = conAcompanante;
+
+      const anterior = preboda.value;
+      const opciones = conAcompanante
+        ? [
+            ["", "Elige una opción"],
+            ["solo", "Sí, pero voy yo solo"],
+            ["dos", "Sí, vamos los dos"],
+            ["no", "No"]
+          ]
+        : [
+            ["", "Elige una opción"],
+            ["si", "Sí"],
+            ["no", "No"]
+          ];
+
+      preboda.replaceChildren();
+      for (const [value, texto] of opciones) {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = texto;
+        if (value === "") {
+          option.disabled = true;
+          option.selected = true;
+        }
+        preboda.append(option);
+      }
+
+      if (opciones.some(([value]) => value !== "" && value === anterior)) {
+        preboda.value = anterior;
+      }
+    }
 
     function mostrarPaso(paso, visible) {
       paso.hidden = !visible;
@@ -1421,6 +1468,7 @@
       mostrarPaso(pasoCierre, respondioAcompanante);
       preguntaBus.textContent = conAcompanante ? "¿Necesitáis bus?" : "¿Necesitas bus?";
       preguntaPreboda.textContent = conAcompanante ? "¿Venís a la preboda?" : "¿Vienes a la preboda?";
+      opcionesPreboda(conAcompanante);
       enviar.hidden = !desplegables.every(elegido);
     }
 
